@@ -11,7 +11,7 @@ feed_url = 'http://b.hatena.ne.jp/hotentry/it.rss'
 bot = Cinch::Bot.new do
   configure do |c|
  
-    # サーバIPアドレス指定
+    # IRCサーバIPアドレス指定
     c.server = "127.0.0.1"
  
     #SSL通信を使っていた場合はこれを記述
