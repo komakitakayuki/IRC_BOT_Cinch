@@ -3,36 +3,36 @@
 require 'cinch'
 require 'rss'
  
-#エンコードはサーバによって適時変えること
 IRC_ENCODING='ISO-2022-JP'
  
-feed_url = 'http://b.hatena.ne.jp/hotentry/it.rss'
+# you can write any RSS url
+feed_url = 'http://RSS_URL'
  
 bot = Cinch::Bot.new do
   configure do |c|
  
-    # IRCサーバIPアドレス指定
+    # IRC Server IP
     c.server = "127.0.0.1"
  
-    #SSL通信を使っていた場合はこれを記述
+    # If you use SSL, write like this
     c.ssl.use = true
      
-    #ポート指定
+    # IRC Server port
     c.port = "6668"
      
-    #IRCサーバにパスワードをかけている場合はパスワードを記述
+    # IRC Server Password
     c.password = "password"
  
-    # チャンネル名と、チャンネルにパスワードをかけている場合は記述
+    # Channel name & password
     c.channels = ["#test password"]
  
-    # botのニックネームとかユーザ名を記述
+    # bot nick name and real name
     c.nick = 'bot'
     c.realname = 'bot'
     c.user = 'bot'
   end
  
-  on :message, "hatena" do |m|
+  on :message, "rss" do |m|
     rss = RSS::Parser.parse(feed_url)
  
     m.reply "o "+ rss.channel.title.encode(IRC_ENCODING).force_encoding('external')
